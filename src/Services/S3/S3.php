@@ -2,6 +2,7 @@
 
 namespace Programic\Aws\Services\S3;
 
+use Aws\Result;
 use Aws\S3\S3Client;
 
 class S3
@@ -25,6 +26,11 @@ class S3
             ];
 
         return $this->client->getObject($args);
+    }
+
+    public function __call($method, $args): Result
+    {
+        return $this->client->{$method}(...$args);
     }
 
     /**

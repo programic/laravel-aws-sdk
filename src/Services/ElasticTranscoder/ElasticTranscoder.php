@@ -4,8 +4,6 @@ namespace Programic\Aws\Services\ElasticTranscoder;
 
 use Aws\ElasticTranscoder\ElasticTranscoderClient;
 use Aws\Result;
-
-use Programic\Aws\Exceptions\MethodNotFoundException;
 use Programic\Aws\Services\ElasticTranscoder\Job\CreateJob;
 use Programic\Aws\Services\ElasticTranscoder\Job\Job;
 use Programic\Aws\Services\ElasticTranscoder\Job\Result as JobResult;
