@@ -1,0 +1,53 @@
+{
+    "name": "programic/laravel-aws-sdk",
+    "license": "proprietary",
+    "type": "package",
+    "description": "Using AWS services in Laravel",
+    "keywords": [
+        "programic",
+        "laravel",
+        "aws",
+        "amazon",
+        "s3",
+        "sqs",
+        "elastic transcoder"
+    ],
+    "readme": "README.md",
+    "authors": [
+        {
+            "name": "Programic",
+            "email": "development@programic.com",
+            "homepage": "https://programic.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "^8.0",
+        "aws/aws-sdk-php": "^3.198"
+    },
+    "autoload": {
+        "psr-4": {
+            "Programic\\Aws\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Programic\\Aws\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Programic\\Aws\\AwsServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
