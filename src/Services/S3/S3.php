@@ -28,6 +28,11 @@ class S3
         return $this->client->getObject($args);
     }
 
+    public function getIterator($describe, $options): \Iterator
+    {
+        return $this->client->getIterator($describe, $options);
+    }
+
     public function __call($method, $args): Result
     {
         return $this->client->{$method}(...$args);

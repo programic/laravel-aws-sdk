@@ -38,11 +38,10 @@ class Service
             'version' => '2006-03-01',
             'key' => $config['settings']['key'],
             'secret' => $config['settings']['secret'],
-            'profile' => $config['settings']['profile'],
             'region' => $config['settings']['region'],
         ]);
         $app->singleton(S3::class, fn() => new S3($s3Client));
-        $app->alias(S3::class, 's3');
+        $app->alias(S3::class, 'S3');
 
         /**
          *  AWS ElasticTranscoder injection
