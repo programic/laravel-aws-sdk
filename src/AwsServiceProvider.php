@@ -28,34 +28,34 @@ class AwsServiceProvider extends ServiceProvider
         if (File::exists(__DIR__ . '/helpers.php')) {
             require __DIR__ . '/helpers.php';
         }
-
-        Queue::before(function (JobProcessing $event) {
-            if ($event->connectionName === 'sqs') {
-                try {
-                    $payload = $event->job->payload();
-                    $record = $payload['Records'][0];
-                    $eventSource = str_replace('aws:', '', $record['eventSource']);
-                    $eventName = explode(':', $record['eventName'])[0];
-                    $eventInstanceKey = $eventSource . '.' . $eventName;
-
-                    $jobInstance = Sqs::jobs()[$eventInstanceKey] ?? null;
-
-                    if ($jobInstance && class_exists($jobInstance)) {
-                        $jobInstance::dispatch($record)->onConnection(config('aws.queue.connection'));
-                    } else {
-                        throw new SqsJobNotFoundException($eventInstanceKey . ' not configured');
-                    }
-                } catch (\Throwable $e) {
-                    dump('throwable');
-//                    event(new UnknownJob($event->job));
-                } finally {
-                    dump('delete');
-                    dump($event->job->delete());
-                }
-            } else {
-                dump($event->connectionName);
-            }
-        });
+//
+//        Queue::before(function (JobProcessing $event) {
+//            if ($event->connectionName === 'sqs') {
+//                try {
+//                    $payload = $event->job->payload();
+//                    $record = $payload['Records'][0];
+//                    $eventSource = str_replace('aws:', '', $record['eventSource']);
+//                    $eventName = explode(':', $record['eventName'])[0];
+//                    $eventInstanceKey = $eventSource . '.' . $eventName;
+//
+//                    $jobInstance = Sqs::jobs()[$eventInstanceKey] ?? null;
+//
+//                    if ($jobInstance && class_exists($jobInstance)) {
+//                        $jobInstance::dispatch($record)->onConnection(config('aws.queue.connection'));
+//                    } else {
+//                        throw new SqsJobNotFoundException($eventInstanceKey . ' not configured');
+//                    }
+//                } catch (\Throwable $e) {
+//                    dump('throwable');
+////                    event(new UnknownJob($event->job));
+//                } finally {
+//                    dump('delete');
+//                    dump($event->job->delete());
+//                }
+//            } else {
+//                dump($event->connectionName);
+//            }
+//        });
     }
 
     private function publishConfig()
