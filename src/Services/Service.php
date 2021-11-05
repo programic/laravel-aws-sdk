@@ -31,6 +31,11 @@ class Service
         });
         $app->alias(Aws::class, 'aws');
 
+        // AWS takes credentials from getenv somethimes. So this is needed
+        putenv("AWS_ACCESS_KEY_ID=" . $config['settings']['key']);
+        putenv("AWS_SECRET_ACCESS_KEY=" . $config['settings']['secret']);
+        putenv("AWS_DEFAULT_REGION=" . $config['settings']['region']);
+
         /**
          *  AWS S3 injection
          */
